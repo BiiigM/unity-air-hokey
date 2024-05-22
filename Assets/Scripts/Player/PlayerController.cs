@@ -1,29 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    public Rigidbody rb;
-    public float speed = 5f;
-    public float sprintSpeed = 10f;
+    [SerializeField] private float playerSpeed = 2.0f;
 
-    Vector3 moveAxis;
+    [SerializeField] private float playerSprintMultiplier = 2f;
 
-    void Update()
+    [SerializeField] private float gravityValue = -9.81f;
+
+    private CharacterController _controller;
+
+    private Vector2 _movementInput = Vector2.zero;
+    private bool _sprint;
+
+    private void Start()
     {
-        moveAxis = new Vector3(Input.GetAxis("HorizontalP1"), 0, Input.GetAxis("VerticalP1"));
-        moveAxis = Vector3.ClampMagnitude(moveAxis, 1);
+        _controller = gameObject.GetComponent<CharacterController>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        float walkSpeed = speed;
-        Debug.Log(Input.GetAxis("SprintP1"));
-        if (Input.GetAxis("SprintP1") == 1) {
-            walkSpeed = sprintSpeed;
-        }
+        var move = new Vector3(_movementInput.x, gravityValue * Time.deltaTime, _movementInput.y);
+        var newSpeed = playerSpeed;
 
-        rb.MovePosition(rb.position + (moveAxis * speed * Time.fixedDeltaTime));
+        if (_sprint) newSpeed = playerSpeed * playerSprintMultiplier;
+
+        _controller.Move(move * Time.deltaTime * newSpeed);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        _movementInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        _sprint = context.action.triggered;
     }
 }
