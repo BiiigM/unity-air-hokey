@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8720522748237442328}
   - component: {fileID: 7521674379013544240}
   - component: {fileID: 5817261767343155427}
+  - component: {fileID: 6229581898037042318}
   m_Layer: 0
   m_Name: Puck
   m_TagString: Untagged
@@ -135,3 +136,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &6229581898037042318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715178814732017215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0822f7511bcb2f489656a82d5cf71cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
