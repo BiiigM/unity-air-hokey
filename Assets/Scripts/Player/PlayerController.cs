@@ -1,33 +1,31 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 2.0f;
 
     [SerializeField] private float playerSprintMultiplier = 2f;
 
-    [SerializeField] private float gravityValue = -9.81f;
-
-    private CharacterController _controller;
-
     private Vector2 _movementInput = Vector2.zero;
+
+    private Rigidbody _rb;
     private bool _sprint;
 
     private void Start()
     {
-        _controller = gameObject.GetComponent<CharacterController>();
+        _rb = gameObject.GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        var move = new Vector3(_movementInput.x, gravityValue * Time.deltaTime, _movementInput.y);
+        var move = new Vector3(_movementInput.x, 0, _movementInput.y);
         var newSpeed = playerSpeed;
 
         if (_sprint) newSpeed = playerSpeed * playerSprintMultiplier;
 
-        _controller.Move(move * Time.deltaTime * newSpeed);
+        _rb.velocity = move * newSpeed;
     }
 
     public void OnMove(InputAction.CallbackContext context)
