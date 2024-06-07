@@ -15,5 +15,10 @@ public class ResetScript : MonoBehaviour
     public void ResetObject()
     {
         this.transform.position = _originalPoint;
+        Rigidbody rigidbody = this.GetComponent<Rigidbody>();
+        if (rigidbody != null)
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
     }
 }
