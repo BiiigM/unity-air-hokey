@@ -147,6 +147,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "2D Vector",
+                    "id": "94a05a5e-919c-4b68-84f9-c5f228e4a219",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "",
                     "id": "76e59079-9204-4274-9967-c9235c2d52b1",
                     "path": "<Keyboard>/q",
