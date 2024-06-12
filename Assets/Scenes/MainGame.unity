@@ -509,7 +509,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 48
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!64 &732704108
 MeshCollider:
@@ -1839,7 +1839,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 48
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!64 &4032249085825656641
 MeshCollider:

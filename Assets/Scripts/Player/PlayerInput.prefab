@@ -75,12 +75,24 @@ MonoBehaviour:
     m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: be033bc9-94ed-4d02-8fd4-bba4983fc81b
-    m_ActionName: Player/Sprint[/Keyboard/leftShift,/Keyboard/rightShift]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: bfe2eb14-f969-4360-bd72-47a89b128884
     m_ActionName: Player/Join[/Keyboard/q,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9087300479503108217}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c657f16a-7c2a-4bcf-bfaa-dd7ac7972f7e
+    m_ActionName: Player/Reset[/DualShock4GamepadHID/buttonSouth,/Keyboard/r,/Keyboard/minus]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
