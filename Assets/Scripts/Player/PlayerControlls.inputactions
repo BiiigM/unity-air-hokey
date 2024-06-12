@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "c657f16a-7c2a-4bcf-bfaa-dd7ac7972f7e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -81,7 +90,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "AROW",
+                    "name": "ARROW",
                     "id": "229848a1-04c7-44fb-8b41-b89fd334fa6b",
                     "path": "2DVector",
                     "interactions": "",
@@ -158,6 +167,61 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "2D Vector",
+                    "id": "d36a2eea-1794-4052-8852-2c7ae78e6ddf",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "0d049df7-1a72-4be2-9382-2d50c1ecd13a",
+                    "path": "<HID::Nintendo Co., Ltd. Joy-Con Charging Grip>/stick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Nintendo",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "54e0a574-b352-4044-944b-a323cb5dc5ba",
+                    "path": "<HID::Nintendo Co., Ltd. Joy-Con Charging Grip>/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Nintendo",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "9b3269c4-ee5b-4a16-a375-44da987e6158",
+                    "path": "<HID::Nintendo Co., Ltd. Joy-Con Charging Grip>/stick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Nintendo",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "c641f92b-f4a0-4d2d-8bb3-56fceb369893",
+                    "path": "<HID::Nintendo Co., Ltd. Joy-Con Charging Grip>/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Nintendo",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "76e59079-9204-4274-9967-c9235c2d52b1",
                     "path": "<Keyboard>/q",
@@ -187,6 +251,50 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ed67f4dd-6b49-443e-93a9-414500d5c3d4",
+                    "path": "<HID::Nintendo Co., Ltd. Joy-Con Charging Grip>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Nintendo",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "089dd7ae-85d3-4da7-8930-a90775c050af",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3afc8e70-6657-48c0-b875-0f8c1b84ec7e",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardP1",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04e13f1d-f722-407d-b502-56e4dad62f53",
+                    "path": "<Keyboard>/minus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardP2",
+                    "action": "Reset",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -222,6 +330,17 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Nintendo",
+            "bindingGroup": "Nintendo",
+            "devices": [
+                {
+                    "devicePath": "<HID::Nintendo Co., Ltd. Joy-Con Charging Grip>",
                     "isOptional": false,
                     "isOR": false
                 }

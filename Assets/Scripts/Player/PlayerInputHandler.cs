@@ -21,6 +21,12 @@ public class PlayerInputHandler : MonoBehaviour
         _cameraZDistance = mainCamera.WorldToScreenPoint(_playerMover.transform.position).z;
     }
 
+    public void Reset(InputAction.CallbackContext context)
+    {
+        var resetScript = _playerMover.GetComponent<ResetScript>();
+        if (resetScript != null) resetScript.ResetObject();
+    }
+
     private void Update()
     {
         if (!MultiMouseWrapper.Instance.IsMouseActive(_playerInput.playerIndex)) return;
