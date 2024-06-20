@@ -223,23 +223,12 @@
                 },
                 {
                     "name": "",
-                    "id": "76e59079-9204-4274-9967-c9235c2d52b1",
-                    "path": "<Keyboard>/q",
+                    "id": "23baefe2-0b23-451f-abfb-b7dc5d443860",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardP1",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b7adca1f-150b-4fc5-9280-0573c91645fe",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardP2",
-                    "action": "Join",
+                    "groups": "Mouse",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -261,6 +250,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Nintendo",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "607316cc-b246-451b-9d8e-513eb54156f9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse",
                     "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -341,6 +341,17 @@
             "devices": [
                 {
                     "devicePath": "<HID::Nintendo Co., Ltd. Joy-Con Charging Grip>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Mouse",
+            "bindingGroup": "Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
