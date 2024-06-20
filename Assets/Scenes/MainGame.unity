@@ -793,7 +793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1200830477927290822, guid: f18a15010aa50a9458a7504145eefbef, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: KeyboardP1
+      value: Controller
       objectReference: {fileID: 0}
     - target: {fileID: 3425326457852123986, guid: f18a15010aa50a9458a7504145eefbef, type: 3}
       propertyPath: m_LocalPosition.x
@@ -979,7 +979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1200830477927290822, guid: f18a15010aa50a9458a7504145eefbef, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: Controller
+      value: KeyboardP1
       objectReference: {fileID: 0}
     - target: {fileID: 3425326457852123986, guid: f18a15010aa50a9458a7504145eefbef, type: 3}
       propertyPath: m_LocalPosition.x

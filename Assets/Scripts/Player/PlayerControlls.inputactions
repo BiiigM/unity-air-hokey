@@ -223,6 +223,17 @@
                 },
                 {
                     "name": "",
+                    "id": "0a70f39a-0d58-453c-898f-7b520ec1c417",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "76e59079-9204-4274-9967-c9235c2d52b1",
                     "path": "<Keyboard>/q",
                     "interactions": "",
