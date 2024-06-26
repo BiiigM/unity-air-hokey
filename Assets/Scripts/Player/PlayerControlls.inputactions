@@ -356,6 +356,16 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "HandTrackingP1",
+            "bindingGroup": "HandTrackingP1",
+            "devices": []
+        },
+        {
+            "name": "HandTrackingP2",
+            "bindingGroup": "HandTrackingP2",
+            "devices": []
         }
     ]
 }
