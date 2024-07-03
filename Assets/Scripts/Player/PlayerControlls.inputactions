@@ -223,11 +223,22 @@
                 },
                 {
                     "name": "",
-                    "id": "23baefe2-0b23-451f-abfb-b7dc5d443860",
-                    "path": "<Mouse>/position",
+                    "id": "ca2c231c-3227-4e2d-ad23-115025d7c9cf",
+                    "path": "<HandTrackingDevice>/rightPosition",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Mouse",
+                    "groups": "HandTrackingP1",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab73f12d-5c16-4c02-9515-7e845123c179",
+                    "path": "<HandTrackingDevice>/leftPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "HandTrackingP2",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -250,17 +261,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Nintendo",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "607316cc-b246-451b-9d8e-513eb54156f9",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse",
                     "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -347,25 +347,26 @@
             ]
         },
         {
-            "name": "Mouse",
-            "bindingGroup": "Mouse",
+            "name": "HandTrackingP1",
+            "bindingGroup": "HandTrackingP1",
             "devices": [
                 {
-                    "devicePath": "<Mouse>",
+                    "devicePath": "<HandTrackingDevice>",
                     "isOptional": false,
                     "isOR": false
                 }
             ]
         },
         {
-            "name": "HandTrackingP1",
-            "bindingGroup": "HandTrackingP1",
-            "devices": []
-        },
-        {
             "name": "HandTrackingP2",
             "bindingGroup": "HandTrackingP2",
-            "devices": []
+            "devices": [
+                {
+                    "devicePath": "<HandTrackingDevice>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
         }
     ]
 }

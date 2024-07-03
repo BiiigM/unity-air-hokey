@@ -1,5 +1,5 @@
-using System;
 using System.Linq;
+using CustomDevices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,19 +25,19 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.E) &&
                 !PlayerInput.all.Select(input => input.currentControlScheme).Any("KeyboardP1".Contains))
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "KeyboardP1",
-                    pairWithDevice: Keyboard.current);
+                    pairWithDevice: Mouse.current);
 
             // Hand tracking
-            if (_handData && !String.IsNullOrEmpty(_handData.handDataLeft) && !PlayerInput.all
+            if (_handData && !string.IsNullOrEmpty(_handData.handDataLeft) && !PlayerInput.all
                     .Select(input => input.currentControlScheme)
                     .Any("HandTrackingP1".Contains))
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP1",
-                    pairWithDevice: null);
-            if (_handData && !String.IsNullOrEmpty(_handData.handDataRight) && !PlayerInput.all
+                    pairWithDevice: HandTrackingDevice.current);
+            if (_handData && !string.IsNullOrEmpty(_handData.handDataRight) && !PlayerInput.all
                     .Select(input => input.currentControlScheme)
                     .Any("HandTrackingP2".Contains))
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP2",
-                    pairWithDevice: null);
+                    pairWithDevice: HandTrackingDevice.current);
         }
     }
 }
