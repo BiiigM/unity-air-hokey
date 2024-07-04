@@ -74,7 +74,7 @@ public class ReceiveHandData : MonoBehaviour
         if (vectorString == null || !Regex.Match(vectorString, @"\(\d+, \d+\)", RegexOptions.None).Success) return null;
         var removeBrackets = vectorString.Replace("(", "").Replace(")", "");
         var splitString = removeBrackets.Split(", ");
-        return new Vector2(int.Parse(splitString[0]), int.Parse(splitString[1]));
+        return new Vector2(int.Parse(splitString[0]), 720 - int.Parse(splitString[1]));
     }
 
     private void ReceiveData(int handPort, ref string handData, Action<string> debugFunction)

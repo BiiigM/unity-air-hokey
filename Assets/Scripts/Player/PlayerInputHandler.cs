@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using CustomDevices;
 using MultiMouseUnity;
@@ -7,9 +8,12 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
     private float _cameraZDistance;
-    private ReceiveHandData _handData;
-    private Vector2 _handPosition = Vector2.zero;
     private Camera _mainCamera;
+
+    //Map Orientations
+    private GameObject _mapCenter;
+    private GameObject _mapTopRight;
+
     private PlayerInput _playerInput;
     private PlayerMover _playerMover;
 
@@ -22,7 +26,9 @@ public class PlayerInputHandler : MonoBehaviour
         MultiMouseWrapper.OnLeftMouseButtonDown[index] += HideCursor;
         _mainCamera = Camera.main;
         _cameraZDistance = _mainCamera.WorldToScreenPoint(_playerMover.transform.position).z;
-        _handData = FindObjectsByType<ReceiveHandData>(FindObjectsSortMode.None)[0];
+
+        _mapCenter = GameObject.Find("MapCenter");
+        _mapTopRight = GameObject.Find("MapTopRight");
     }
 
     public void Reset(InputAction.CallbackContext context)
@@ -63,23 +69,38 @@ public class PlayerInputHandler : MonoBehaviour
             var playerPosition = _playerMover.transform.position;
             var vector2 = context.ReadValue<Vector2>();
 
-            _handPosition = new Vector2(
-                Mathf.Clamp(vector2.x, 0, Screen.width),
-                Mathf.Clamp(vector2.y, 0, Screen.height));
+            var handWorldPositionV2 = GetVector2FormMap(NormalizeHandPosition(vector2));
+            var handWorldPosition = new Vector3(handWorldPositionV2.x, _mapCenter.transform.position.y,
+                handWorldPositionV2.y);
 
-            var handWorldPosition = _mainCamera.ScreenToWorldPoint(new Vector3(_handPosition.x, _handPosition.y,
-                _cameraZDistance));
             var handDirection = (handWorldPosition - playerPosition).normalized;
-            if (Vector3.Distance(handWorldPosition, playerPosition) < 0.15)
-            {
-                _playerMover.OnMove(Vector2.zero);
-                return;
-            }
 
-            _playerMover.OnMove(new Vector2(handDirection.x, handDirection.z));
+            _playerMover.OnMove(new Vector2(handDirection.x, handDirection.z) *
+                                Vector3.Distance(handWorldPosition, playerPosition));
             return;
         }
 
         _playerMover.OnMove(context.ReadValue<Vector2>());
+    }
+
+    private Vector2 NormalizeHandPosition(Vector2 handPosition)
+    {
+        var width = 1280 / 2;
+        var height = 720 / 2;
+
+        var handX = handPosition.x;
+        var handY = handPosition.y;
+
+        return new Vector2((handX - width) / width, (handY - height) / height);
+    }
+
+    private Vector2 GetVector2FormMap(Vector2 normalizedHandPosition)
+    {
+        var vMapCenter = new Vector2(_mapCenter.transform.position.x, _mapCenter.transform.position.z);
+        var vMapTopRight = new Vector2(_mapTopRight.transform.position.x, _mapTopRight.transform.position.z);
+
+        var distance = new Vector2(Math.Abs(vMapTopRight.x) - Math.Abs(vMapCenter.x),
+            Math.Abs(vMapTopRight.y) - Math.Abs(vMapCenter.y));
+        return normalizedHandPosition * distance + vMapCenter;
     }
 }
