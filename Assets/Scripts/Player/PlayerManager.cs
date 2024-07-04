@@ -9,14 +9,19 @@ namespace Player
     {
         [SerializeField] private GameObject playerPrefab;
         private ReceiveHandData _handData;
+        private PlayerInputManager _inputManager;
 
         private void Start()
         {
             _handData = GetComponent<ReceiveHandData>();
+            _inputManager = GetComponent<PlayerInputManager>();
         }
 
         private void FixedUpdate()
         {
+            // Only allow max 2 players to join
+            if (_inputManager.playerCount >= _inputManager.maxPlayerCount) return;
+
             // Workaround for splitting Keyboard
             if (Input.GetKeyDown(KeyCode.O) &&
                 !PlayerInput.all.Select(input => input.currentControlScheme).Any("KeyboardP2".Contains))
@@ -28,12 +33,12 @@ namespace Player
                     pairWithDevice: Keyboard.current);
 
             // Hand tracking
-            if (_handData && !string.IsNullOrEmpty(_handData.handDataLeft) && !PlayerInput.all
+            if (_handData && !string.IsNullOrEmpty(_handData.handDataRight) && !PlayerInput.all
                     .Select(input => input.currentControlScheme)
                     .Any("HandTrackingP1".Contains))
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP1",
                     pairWithDevice: HandTrackingDevice.current);
-            if (_handData && !string.IsNullOrEmpty(_handData.handDataRight) && !PlayerInput.all
+            if (_handData && !string.IsNullOrEmpty(_handData.handDataLeft) && !PlayerInput.all
                     .Select(input => input.currentControlScheme)
                     .Any("HandTrackingP2".Contains))
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP2",
