@@ -25,7 +25,7 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.E) &&
                 !PlayerInput.all.Select(input => input.currentControlScheme).Any("KeyboardP1".Contains))
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "KeyboardP1",
-                    pairWithDevice: Mouse.current);
+                    pairWithDevice: Keyboard.current);
 
             // Hand tracking
             if (_handData && !string.IsNullOrEmpty(_handData.handDataLeft) && !PlayerInput.all
