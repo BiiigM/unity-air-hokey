@@ -53,7 +53,7 @@ namespace CustomDevices
                 current = null;
         }
 
-        [MenuItem("Tools/Add New Device")]
+        [MenuItem("Tools/Add hand tracking device")]
         public static void Initialize()
         {
             InputSystem.AddDevice<HandTrackingDevice>();
