@@ -35,14 +35,14 @@ namespace Player
             // Hand tracking
             if (_handData && !string.IsNullOrEmpty(_handData.handDataRight) && !PlayerInput.all
                     .Select(input => input.currentControlScheme)
-                    .Any("HandTrackingP1".Contains))
+                    .Any("HandTrackingP1".Contains) && _inputManager.playerCount < 1)
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP1",
-                    pairWithDevice: HandTrackingDevice.current);
+                    pairWithDevice: HandTrackingDevice.current, playerIndex: 0);
             if (_handData && !string.IsNullOrEmpty(_handData.handDataLeft) && !PlayerInput.all
                     .Select(input => input.currentControlScheme)
                     .Any("HandTrackingP2".Contains))
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP2",
-                    pairWithDevice: HandTrackingDevice.current);
+                    pairWithDevice: HandTrackingDevice.current, playerIndex: 1);
         }
     }
 }
