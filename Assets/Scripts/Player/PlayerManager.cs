@@ -33,16 +33,38 @@ namespace Player
                     pairWithDevice: Keyboard.current);
 
             // Hand tracking
-            if (_handData && !string.IsNullOrEmpty(_handData.handDataRight) && !PlayerInput.all
+            if (_handData && !string.IsNullOrEmpty(_handData.handDataLeft) && !PlayerInput.all
                     .Select(input => input.currentControlScheme)
                     .Any("HandTrackingP1".Contains) && _inputManager.playerCount < 1)
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP1",
                     pairWithDevice: HandTrackingDevice.current, playerIndex: 0);
-            if (_handData && !string.IsNullOrEmpty(_handData.handDataLeft) && !PlayerInput.all
+            if (_handData && !string.IsNullOrEmpty(_handData.handDataRight) && !PlayerInput.all
                     .Select(input => input.currentControlScheme)
                     .Any("HandTrackingP2".Contains))
                 PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP2",
                     pairWithDevice: HandTrackingDevice.current, playerIndex: 1);
+        }
+
+        public bool AddMultiMousePlayer(bool playerOne)
+        {
+            if (_inputManager.playerCount >= _inputManager.maxPlayerCount) return false;
+            if (playerOne &&
+                !PlayerInput.all.Select(input => input.currentControlScheme).Any("MultiMouseP1".Contains))
+            {
+                PlayerInput.Instantiate(playerPrefab, controlScheme: "MultiMouseP1",
+                    pairWithDevice: MultiMouseDevice.current);
+                return true;
+            }
+
+            if (!playerOne &&
+                !PlayerInput.all.Select(input => input.currentControlScheme).Any("MultiMouseP2".Contains))
+            {
+                PlayerInput.Instantiate(playerPrefab, controlScheme: "MultiMouseP2",
+                    pairWithDevice: MultiMouseDevice.current);
+                return true;
+            }
+
+            return false;
         }
     }
 }

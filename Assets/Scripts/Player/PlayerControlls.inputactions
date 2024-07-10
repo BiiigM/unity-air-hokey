@@ -224,7 +224,7 @@
                 {
                     "name": "",
                     "id": "ca2c231c-3227-4e2d-ad23-115025d7c9cf",
-                    "path": "<HandTrackingDevice>/rightPosition",
+                    "path": "<HandTrackingDevice>/leftPosition",
                     "interactions": "",
                     "processors": "",
                     "groups": "HandTrackingP1",
@@ -235,10 +235,32 @@
                 {
                     "name": "",
                     "id": "ab73f12d-5c16-4c02-9515-7e845123c179",
-                    "path": "<HandTrackingDevice>/leftPosition",
+                    "path": "<HandTrackingDevice>/rightPosition",
                     "interactions": "",
                     "processors": "",
                     "groups": "HandTrackingP2",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a1681d3-8319-4569-9121-9742ab3336fe",
+                    "path": "<MultiMouseDevice>/mouseOnePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MultiMouseP1",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0582171-0066-4fa3-98c7-3e17bc2fa849",
+                    "path": "<MultiMouseDevice>/mouseTwoPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MultiMouseP2",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -363,6 +385,28 @@
             "devices": [
                 {
                     "devicePath": "<HandTrackingDevice>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "MultiMouseP1",
+            "bindingGroup": "MultiMouseP1",
+            "devices": [
+                {
+                    "devicePath": "<MultiMouseDevice>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "MultiMouseP2",
+            "bindingGroup": "MultiMouseP2",
+            "devices": [
+                {
+                    "devicePath": "<MultiMouseDevice>",
                     "isOptional": false,
                     "isOR": false
                 }
