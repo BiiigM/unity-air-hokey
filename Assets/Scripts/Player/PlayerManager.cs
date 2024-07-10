@@ -1,0 +1,70 @@
+using System.Linq;
+using CustomDevices;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace Player
+{
+    public class PlayerManager : MonoBehaviour
+    {
+        [SerializeField] private GameObject playerPrefab;
+        private ReceiveHandData _handData;
+        private PlayerInputManager _inputManager;
+
+        private void Start()
+        {
+            _handData = GetComponent<ReceiveHandData>();
+            _inputManager = GetComponent<PlayerInputManager>();
+        }
+
+        private void FixedUpdate()
+        {
+            // Only allow max 2 players to join
+            if (_inputManager.playerCount >= _inputManager.maxPlayerCount) return;
+
+            // Workaround for splitting Keyboard
+            if (Input.GetKeyDown(KeyCode.O) &&
+                !PlayerInput.all.Select(input => input.currentControlScheme).Any("KeyboardP2".Contains))
+                PlayerInput.Instantiate(playerPrefab, controlScheme: "KeyboardP2",
+                    pairWithDevice: Keyboard.current);
+            if (Input.GetKeyDown(KeyCode.E) &&
+                !PlayerInput.all.Select(input => input.currentControlScheme).Any("KeyboardP1".Contains))
+                PlayerInput.Instantiate(playerPrefab, controlScheme: "KeyboardP1",
+                    pairWithDevice: Keyboard.current);
+
+            // Hand tracking
+            if (_handData && !string.IsNullOrEmpty(_handData.handDataLeft) && !PlayerInput.all
+                    .Select(input => input.currentControlScheme)
+                    .Any("HandTrackingP1".Contains) && _inputManager.playerCount < 1)
+                PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP1",
+                    pairWithDevice: HandTrackingDevice.current, playerIndex: 0);
+            if (_handData && !string.IsNullOrEmpty(_handData.handDataRight) && !PlayerInput.all
+                    .Select(input => input.currentControlScheme)
+                    .Any("HandTrackingP2".Contains))
+                PlayerInput.Instantiate(playerPrefab, controlScheme: "HandTrackingP2",
+                    pairWithDevice: HandTrackingDevice.current, playerIndex: 1);
+        }
+
+        public bool AddMultiMousePlayer(bool playerOne)
+        {
+            if (_inputManager.playerCount >= _inputManager.maxPlayerCount) return false;
+            if (playerOne &&
+                !PlayerInput.all.Select(input => input.currentControlScheme).Any("MultiMouseP1".Contains))
+            {
+                PlayerInput.Instantiate(playerPrefab, controlScheme: "MultiMouseP1",
+                    pairWithDevice: MultiMouseDevice.current);
+                return true;
+            }
+
+            if (!playerOne &&
+                !PlayerInput.all.Select(input => input.currentControlScheme).Any("MultiMouseP2".Contains))
+            {
+                PlayerInput.Instantiate(playerPrefab, controlScheme: "MultiMouseP2",
+                    pairWithDevice: MultiMouseDevice.current);
+                return true;
+            }
+
+            return false;
+        }
+    }
+}

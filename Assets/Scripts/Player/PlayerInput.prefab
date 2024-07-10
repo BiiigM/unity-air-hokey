@@ -93,7 +93,7 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c657f16a-7c2a-4bcf-bfaa-dd7ac7972f7e
     m_ActionName: Player/Reset[/DualShock4GamepadHID/buttonSouth,/Keyboard/r,/Keyboard/minus]
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1

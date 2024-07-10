@@ -1,14 +1,18 @@
+using System;
 using System.Linq;
-using MultiMouseUnity;
+using CustomDevices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MultiMouseDevice = CustomDevices.MultiMouseDevice;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private float _cameraZDistance;
+    //Map Orientations
+    private GameObject _mapCenter;
+    private GameObject _mapTopRight;
+
     private PlayerInput _playerInput;
     private PlayerMover _playerMover;
-    private Camera mainCamera;
 
     private void Awake()
     {
@@ -16,34 +20,15 @@ public class PlayerInputHandler : MonoBehaviour
         var playerMovers = FindObjectsByType<PlayerMover>(FindObjectsSortMode.None);
         var index = _playerInput.playerIndex;
         _playerMover = playerMovers.FirstOrDefault(mover => mover.GetPlayerIndex() == index);
-        MultiMouseWrapper.OnLeftMouseButtonDown[index] += HideCursor;
-        mainCamera = Camera.main;
-        _cameraZDistance = mainCamera.WorldToScreenPoint(_playerMover.transform.position).z;
+
+        _mapCenter = GameObject.Find("MapCenter");
+        _mapTopRight = GameObject.Find("MapTopRight");
     }
 
     public void Reset(InputAction.CallbackContext context)
     {
         var resetScript = _playerMover.GetComponent<ResetScript>();
         if (resetScript != null) resetScript.ResetObject();
-    }
-
-    private void Update()
-    {
-        if (!MultiMouseWrapper.Instance.IsMouseActive(_playerInput.playerIndex)) return;
-        var playerIndex = _playerInput.playerIndex;
-        var playerPosition = _playerMover.transform.position;
-        var mousePosition = MultiMouseWrapper.Instance.GetMousePosition(playerIndex);
-        var mouseWorldPosition =
-            mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y,
-                _cameraZDistance));
-        var direction = (mouseWorldPosition - playerPosition).normalized;
-        if (Vector3.Distance(mouseWorldPosition, playerPosition) < 0.3)
-        {
-            _playerMover.OnMove(Vector2.zero);
-            return;
-        }
-
-        _playerMover.OnMove(new Vector2(direction.x, direction.z));
     }
 
     private void HideCursor()
@@ -53,7 +38,39 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log(context.ReadValue<Vector2>());
+        if (_playerInput.devices[0].GetType() == typeof(HandTrackingDevice) ||
+            _playerInput.devices[0].GetType() == typeof(MultiMouseDevice))
+        {
+            var vector2 = context.ReadValue<Vector2>();
+
+            var handWorldPositionV2 = GetVector2FormMap(NormalizeHandPosition(vector2));
+            var handWorldPosition = new Vector3(handWorldPositionV2.x, _mapCenter.transform.position.y,
+                handWorldPositionV2.y);
+            _playerMover.GoTo(handWorldPosition);
+            return;
+        }
+
         _playerMover.OnMove(context.ReadValue<Vector2>());
+    }
+
+    private Vector2 NormalizeHandPosition(Vector2 handPosition)
+    {
+        var width = 1280 / 2;
+        var height = 720 / 2;
+
+        var handX = handPosition.x;
+        var handY = handPosition.y;
+
+        return new Vector2((handX - width) / width, (handY - height) / height);
+    }
+
+    private Vector2 GetVector2FormMap(Vector2 normalizedHandPosition)
+    {
+        var vMapCenter = new Vector2(_mapCenter.transform.position.x, _mapCenter.transform.position.z);
+        var vMapTopRight = new Vector2(_mapTopRight.transform.position.x, _mapTopRight.transform.position.z);
+
+        var distance = new Vector2(Math.Abs(vMapTopRight.x) - Math.Abs(vMapCenter.x),
+            Math.Abs(vMapTopRight.y) - Math.Abs(vMapCenter.y));
+        return normalizedHandPosition * distance + vMapCenter;
     }
 }
